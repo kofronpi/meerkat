@@ -1,8 +1,7 @@
-require 'yaml'
-
 module Meerkat
 	module Configuration
-		VALID_OPTIONS_KEYS = [:api_key].freeze
+		VALID_OPTIONS_KEYS = [:api_key, :endpoint, :user_agent, :api_version].freeze
+		DEFAULT_USER_AGENT = "Meerkat Ruby Gem #{Meerkat::VERSION}".freeze
 
 		attr_accessor(*VALID_OPTIONS_KEYS)
 		alias_method :api_token=, :api_key=
@@ -13,7 +12,10 @@ module Meerkat
 		end
 
 		def reset
+			self.endpoint = 'http://resources.meerkatapp.co'
+			self.api_version = '1.0'
 			self.api_key = ENV['MEERKAT_API_KEY'] || ENV['MEERKAT_API_TOKEN']
+			self.user_agent = DEFAULT_USER_AGENT
 		end
 
 		# Convenience method to allow configuration options to be set in a block.

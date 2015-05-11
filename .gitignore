@@ -8,3 +8,4 @@
 /spec/reports/
 /tmp/
 SPEC.md
+.env
