@@ -2,6 +2,9 @@
 
 A ruby wrapper for the Meerkat API.
 
+[![Build Status](https://travis-ci.org/kofronpi/meerkat.svg)](https://travis-ci.org/kofronpi/meerkat)
+[![Code Climate](https://codeclimate.com/github/kofronpi/meerkat/badges/gpa.svg)](https://codeclimate.com/github/kofronpi/meerkat)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -20,26 +23,19 @@ Or install it yourself as:
 
 ## Configuration
 
-You must authenticate all requests with an api key.
+You must authenticate all requests with an api key (ask the Meerkat team).
 
 You can configure like this:
 
 ```ruby
 Meerkat.configure do |config|
-  api_key = 'secret'
+  config.api_key = 'secret'
 end
 ```
 
 ## Usage example
 
-Meerkat.broadcasts
-
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Meerkat.broadcasts fetch all JSON data related to Meerkat broadcasts live now.
 
 ## Contributing
 
@@ -48,3 +44,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+Please read the code of conduct !
