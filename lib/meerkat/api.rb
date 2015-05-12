@@ -8,7 +8,7 @@ module Meerkat
 
     # Creates a new API.
     # @raise [Error:MissingCredentials]
-    def initialize(options={})
+    def initialize(options = {})
       options = Meerkat.options.merge(options)
       (Configuration::VALID_OPTIONS_KEYS + [:api_key]).each do |key|
         send("#{key}=", options[key]) if options[key]

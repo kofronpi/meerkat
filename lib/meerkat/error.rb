@@ -1,6 +1,6 @@
 module Meerkat
   module Error
-    # Custom error class for rescuing from all Gitlab errors.
+    # Custom error class for rescuing from errors.
     class Error < StandardError; end
 
     # Raised when API endpoint credentials not configured.

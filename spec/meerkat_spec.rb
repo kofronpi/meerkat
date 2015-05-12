@@ -13,7 +13,7 @@ describe Meerkat do
     end
   end
 
-  describe ".configure" do
+  describe '.configure' do
     Meerkat::Configuration::VALID_OPTIONS_KEYS.each do |key|
       it "sets the given #{key}" do
         Meerkat.configure do |config|
