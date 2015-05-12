@@ -1,5 +1,4 @@
 require 'httparty'
-
 module Meerkat
   # Class encapsulating HTTP requests behavior
   class Request

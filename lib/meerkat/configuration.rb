@@ -13,7 +13,6 @@ module Meerkat
     end
 
     def reset
-      self.endpoint = 'http://resources.meerkatapp.co'
       self.api_version = '1.0'
       self.api_key = ENV['MEERKAT_API_KEY'] || ENV['MEERKAT_API_TOKEN']
       self.user_agent = DEFAULT_USER_AGENT
