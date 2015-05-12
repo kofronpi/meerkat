@@ -6,6 +6,19 @@ describe Meerkat do
     expect(Meerkat::VERSION).not_to be nil
   end
 
+  describe '.client' do
+    it 'is a Meerkat::Client' do
+      expect(Meerkat.client).to be_a Meerkat::Client
+    end
+
+    it 'does not override other clients' do
+      cl1 = Meerkat.client(endpoint: 'http://endpoint.api.com')
+      cl2 = Meerkat.client(endpoint: 'http://api.endpoint.com')
+      expect(cl1.endpoint).to eq('http://endpoint.api.com')
+      expect(cl2.endpoint).to eq('http://api.endpoint.com')
+    end
+  end
+
   describe '.api_key=' do
     it 'sets the API key' do
       Meerkat.api_key = 'mysecret'
