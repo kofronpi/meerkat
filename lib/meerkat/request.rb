@@ -9,10 +9,17 @@ module Meerkat
 
     attr_accessor :api_key, :endpoint, :api_version
 
+    def perform_get_with_object(path, klass, options = {})
+      response = get(path, options)
+      klass.new(response)
+    end
+
     def get(path, options = {})
       authorization_header(options)
       validate self.class.get(@endpoint + path, options)
     end
+
+    private
 
     # Checks the response code for common errors.
     # Returns parsed response for successful requests.
@@ -30,8 +37,6 @@ module Meerkat
       end
       response.parsed_response
     end
-
-    private
 
     # Sets Authorization header with api_key for requests, and api version.
     # See http://meerkatapp.co/developers#authentication

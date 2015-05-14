@@ -1,3 +1,5 @@
+require 'meerkat/broadcast'
+
 module Meerkat
   class Client
     # Broadcasts resource API interaction
@@ -11,6 +13,10 @@ module Meerkat
       # @return [Array]
       def broadcasts(options = {})
         get('/broadcasts', query: options)
+      end
+
+      def broadcast(id, options = {})
+        perform_get_with_object("/broadcasts/#{id}/summary", Meerkat::Broadcast, options)
       end
 
       def activities(id, options = {})
