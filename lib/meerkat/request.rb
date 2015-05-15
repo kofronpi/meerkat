@@ -1,5 +1,4 @@
 require 'httparty'
-require 'pp'
 module Meerkat
   # Class encapsulating HTTP requests behavior
   class Request
@@ -12,12 +11,10 @@ module Meerkat
 
     def perform_get_with_object(path, klass, options = {})
       response = get(path, options)
-      klass.new(response['result'])
+      klass.new(response['result'], response['followupActions'])
     end
 
     def get(path, options = {})
-      pp @endpoint
-      pp @api_key
       authorization_header(options)
       validate self.class.get(@endpoint + path, options)
     end

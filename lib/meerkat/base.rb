@@ -1,22 +1,11 @@
 require 'hashie'
+require 'meerkat/utils/rubyfier'
 
 module Meerkat
   class Base < Hashie::Mash
+    include Utils::Rubyfier
+
     protected
-
-    def convert_key(key) #:nodoc:
-      underscore_string(key.to_s)
-    end
-
-    # converts a camel_cased string to a underscore string
-    # Same way ActiveSupport does string.underscore
-    def underscore_string(str)
-      str.to_s.gsub(/::/, '/').
-        gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-        gsub(/([a-z\d])([A-Z])/,'\1_\2').
-        tr("-", "_").
-        downcase
-    end
 
     def convert_value(val, duping=false) #:nodoc:
       obj = super

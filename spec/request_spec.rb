@@ -15,7 +15,7 @@ describe Meerkat::Request do
 
     it 'sets the Authorization header when given an api_key' do
       subject.api_key = 'ab7D264efee24ef'
-      expect(subject.send(:authorization_header, {})).to eq({'Authorization'=>'Bearer ab7D264efee24ef'})
+      expect(subject.send(:authorization_header, {})).to eq({'Authorization'=>'ab7D264efee24ef'})
     end
   end
 end
