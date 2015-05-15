@@ -10,6 +10,10 @@ module Meerkat
   extend Configuration
   extend ChannelMethods
 
+  def self.routes
+    client(endpoint: 'https://api.meerkatapp.co').routes
+  end
+
   # Alias for Meerkat::Client.new
   #
   # @return [Meerkat::Client]

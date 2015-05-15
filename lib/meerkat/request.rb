@@ -1,4 +1,5 @@
 require 'httparty'
+require 'pp'
 module Meerkat
   # Class encapsulating HTTP requests behavior
   class Request
@@ -15,6 +16,8 @@ module Meerkat
     end
 
     def get(path, options = {})
+      pp @endpoint
+      pp @api_key
       authorization_header(options)
       validate self.class.get(@endpoint + path, options)
     end
@@ -43,7 +46,7 @@ module Meerkat
     # @raise [Error::MissingCredentials] if no api key is set
     def authorization_header(options)
       fail(Error::MissingCredentials.new, 'Please provide an api_key for user') unless @api_key
-      options[:headers] = { 'Authorization' => "Bearer #{@api_key}" }
+      options[:headers] = { 'Authorization' => "#{@api_key}" }
     end
 
     def error_message(response)
