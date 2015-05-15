@@ -1,3 +1,5 @@
+require 'meerkat/user_mash'
+
 module Meerkat
   class Client
     # Users resource API interaction
@@ -5,13 +7,13 @@ module Meerkat
       # Gets details about a Meerkat user.
       #
       # @example
-      #   Meerkat.user_profile('54fb2e454d0000d23bb9c40f')
+      #   Meerkat.user('54fb2e454d0000d23bb9c40f')
       #
       # @param [String] user id
       # @param  [Hash] options A customizable set of options.
-      # @return [Array]
-      def user_profile(id, options = {})
-        get("/users/#{id}/profile", query: options)
+      # @return [Meerkat::UserMash]
+      def user(id, options = {})
+        perform_get_with_object("/users/#{id}/profile", Meerkat::UserMash, options)
       end
     end
   end

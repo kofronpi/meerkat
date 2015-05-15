@@ -1,4 +1,4 @@
-require 'meerkat/broadcast'
+require 'meerkat/broadcast_mash'
 
 module Meerkat
   class Client
@@ -10,13 +10,22 @@ module Meerkat
       #   Meerkat.broadcasts
       #
       # @param  [Hash] options A customizable set of options.
-      # @return [Array]
+      # @return [Array] a raw JSON array of broadcasts.
       def broadcasts(options = {})
         get('/broadcasts', query: options)
       end
 
+
+      # Gets a list of broadcasts currently live.
+      #
+      # @example
+      #   Meerkat.broadcasts
+      #
+      # @param [String] broadcast id
+      # @param  [Hash] options A customizable set of options.
+      # @return [Meerkat::BroadcastMash]
       def broadcast(id, options = {})
-        perform_get_with_object("/broadcasts/#{id}/summary", Meerkat::Broadcast, options)
+        perform_get_with_object("/broadcasts/#{id}/summary", Meerkat::BroadcastMash, options)
       end
 
       def activities(id, options = {})
@@ -25,10 +34,6 @@ module Meerkat
 
       def watchers(id, options = {})
         get("/broadcasts/#{id}/watchers", query: options)
-      end
-
-      def summary(id, options = {})
-        get("/broadcasts/#{id}/summary", query: options)
       end
     end
   end

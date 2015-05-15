@@ -10,7 +10,7 @@ module Meerkat
       end
 
       def comments(id, options = {})
-        get("/broadcasts/#{id}/comments", query: options)
+        get("/broadcasts/#{id}/comments", Meerkat::User, options)
       end
     end
   end

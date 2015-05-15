@@ -1,6 +1,6 @@
 require 'meerkat/base'
 
 module Meerkat
-  class Broadcast < Base
+  class UserMash < Base
   end
 end

@@ -11,7 +11,7 @@ module Meerkat
 
     def perform_get_with_object(path, klass, options = {})
       response = get(path, options)
-      klass.new(response)
+      klass.new(response['result'])
     end
 
     def get(path, options = {})

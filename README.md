@@ -4,6 +4,7 @@ A ruby wrapper for the Meerkat API.
 
 [![Build Status](https://travis-ci.org/kofronpi/meerkat.svg)](https://travis-ci.org/kofronpi/meerkat)
 [![Code Climate](https://codeclimate.com/github/kofronpi/meerkat/badges/gpa.svg)](https://codeclimate.com/github/kofronpi/meerkat)
+[![Coverage Status](https://coveralls.io/repos/kofronpi/meerkat/badge.svg)](https://coveralls.io/r/kofronpi/meerkat)
 
 ## Installation
 
@@ -35,7 +36,15 @@ end
 
 ## Usage example
 
-Meerkat.broadcasts fetch all JSON data related to Meerkat broadcasts live now.
+```ruby
+# Fetch all broadcasts as raw JSON.
+Meerkat.broadcasts
+
+# Fetch a specific broadcast information by ID.
+b = Meerkat.broadcast('3cdbb566-cded-4170-86d9-fbdb8bbcbcc9')
+b.broadcaster.display_name
+# "Jens Travolt"
+```
 
 ## Contributing
 

@@ -1,32 +1,33 @@
+require 'hashie'
+
 module Meerkat
-  class Base
-    def initialize(hash)
-      @hash = hash
-      @data = hash.inject({}) do |data, (key,value)|
-        value = Base.new(value) if value.is_a? Hash
-        data[key.to_s] = value
-        data
-      end
+  class Base < Hashie::Mash
+    protected
+
+    def convert_key(key) #:nodoc:
+      underscore_string(key.to_s)
     end
 
-    # @return [Hash] The original hash.
-    def to_hash
-      @hash
-    end
-    alias_method :to_h, :to_hash
-
-    # @return [String] Formatted string with the class name, object id and original hash.
-    def inspect
-      "#<#{self.class}:#{object_id} {hash: #{@hash.inspect}}"
-    end
-
-    # Delegate to Base.
-    def method_missing(key)
-      @data.key?(key.to_s) ? @data[key.to_s] : nil
+    # converts a camel_cased string to a underscore string
+    # Same way ActiveSupport does string.underscore
+    def underscore_string(str)
+      str.to_s.gsub(/::/, '/').
+        gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+        gsub(/([a-z\d])([A-Z])/,'\1_\2').
+        tr("-", "_").
+        downcase
     end
 
-    def respond_to?(method_name, include_private = false)
-      @hash.keys.map(&:to_sym).include?(method_name.to_sym) || super
+    def convert_value(val, duping=false) #:nodoc:
+      obj = super
+      obj = self.class.new(obj) if Hashie::Mash === obj
+      obj
+    end
+
+    def initializing_reader(key)
+      ck = convert_key(key)
+      regular_writer(ck, self.class.new) unless key?(ck)
+      regular_reader(ck)
     end
   end
 end
